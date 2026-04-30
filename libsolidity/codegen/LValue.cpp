@@ -242,6 +242,7 @@ void GenericStorageItem<IsTransient>::retrieveValue(langutil::SourceLocation con
 		if (type->category() == Type::Category::UserDefinedValueType)
 			type = type->encodingType();
 		bool cleaned = false;
+		// shift bytes to the right positioning the function pointer at the start of the slot
 		m_context
 			<< Instruction::SWAP1 << s_loadInstruction << Instruction::SWAP1
 			<< u256(0x100) << Instruction::EXP << Instruction::SWAP1 << Instruction::DIV;
@@ -257,9 +258,12 @@ void GenericStorageItem<IsTransient>::retrieveValue(langutil::SourceLocation con
 			}
 			else if (fun->kind() == FunctionType::Kind::Internal)
 			{
+				// internal function pointers occupy 8 bytes, so we mask the remaining bytes in the slot
+				m_context << ((u256(0x1) << (8 * type->storageBytes())) - 1) << Instruction::AND;
 				m_context << Instruction::DUP1 << Instruction::ISZERO;
 				CompilerUtils(m_context).pushZeroValue(*fun);
 				m_context << Instruction::MUL << Instruction::OR;
+				cleaned = true;
 			}
 		}
 		else if (type->leftAligned())
