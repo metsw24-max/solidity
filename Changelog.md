@@ -5,6 +5,7 @@ Language Features:
 Compiler Features:
 
 Bugfixes:
+* Constant Evaluator: Fix ICE when evaluating builtin `erc7201` with wrong number of parameters.
 * NatSpec: Disallow `@return` tag in event documentation.
 
 
