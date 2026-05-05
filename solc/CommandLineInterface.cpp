@@ -38,8 +38,6 @@
 #include <libsolidity/interface/DebugSettings.h>
 #include <libsolidity/interface/ImportRemapper.h>
 #include <libsolidity/interface/StorageLayout.h>
-#include <libsolidity/lsp/LanguageServer.h>
-#include <libsolidity/lsp/Transport.h>
 
 #include <libyul/YulStack.h>
 
@@ -1192,9 +1190,11 @@ void CommandLineInterface::handleAst()
 
 void CommandLineInterface::serveLSP()
 {
-	lsp::StdioTransport transport;
-	if (!lsp::LanguageServer{transport}.run())
-		solThrow(CommandLineExecutionError, "LSP terminated abnormally.");
+	solThrow(
+		CommandLineExecutionError,
+		"Language Server Protocol (LSP) support has been removed from solc. "
+		"See the changelog for details."
+	);
 }
 
 void CommandLineInterface::link()

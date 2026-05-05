@@ -702,9 +702,8 @@ General Information)").c_str(),
 		)
 		(
 			g_strLSP.c_str(),
-			"(experimental) Switch to the language server mode. "
-			"Allows the compiler to be used as an analysis backend for your favourite IDE. "
-			"In this mode no input files are accepted and the compiler expects language server protocol (LSP) messages on standard input."
+			"Removed. Previously switched solc to language server (LSP) mode. "
+			"This mode is no longer supported and selecting it now produces an error."
 		)
 	;
 	desc.add(alternativeInputModes);

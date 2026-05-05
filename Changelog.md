@@ -3,6 +3,7 @@
 Language Features:
 
 Compiler Features:
+* Commandline Interface: Remove Language Server Protocol (LSP) support. The `--lsp` flag still exists but now reports a clear error explaining that the feature has been removed.
 
 Bugfixes:
 * NatSpec: Disallow `@return` tag in event documentation.
