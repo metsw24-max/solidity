@@ -3,6 +3,7 @@
 Language Features:
 
 Compiler Features:
+* EVM-ASM Optimizer: Improve performance of block deduplicator.
 
 Bugfixes:
 * NatSpec: Disallow `@return` tag in event documentation.
