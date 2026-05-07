@@ -5,6 +5,7 @@ Language Features:
 Compiler Features:
 
 Bugfixes:
+* Custom Storage Layout: Fix UB when emitting warning for contracts with no variables near the end of storage.
 * NatSpec: Disallow `@return` tag in event documentation.
 
 
