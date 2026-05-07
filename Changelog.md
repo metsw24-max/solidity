@@ -32,6 +32,7 @@ Bugfixes:
 * Yul: Fix incorrect serialization of Yul object names containing double quotes and escape sequences, producing output that could not be parsed as valid Yul.
 * Yul EVM Code Transform: Improve stack shuffler performance by fixing a BFS deduplication issue.
 * Yul IR Code Generation: Preserve custom error argument of `require` when stripping of revert strings is selected via `--revert-strings strip`.
+* Yul Optimizer: Fix a bug in `UnusedStoreEliminator`, which could lead to incorrect removal of `mstore` or `sstore` in certain cases.
 
 
 ### 0.8.34 (2026-02-18)
