@@ -22,6 +22,8 @@
 
 #include <libyul/optimiser/SSAValueTracker.h>
 
+#include <liblangutil/Exceptions.h>
+
 #include <libyul/AST.h>
 
 using namespace solidity;
@@ -35,6 +37,11 @@ void SSAValueTracker::operator()(Assignment const& _assignment)
 
 void SSAValueTracker::operator()(FunctionDefinition const& _funDef)
 {
+	solAssert(!m_values.contains(_funDef.name), "SSAValueTracker requires Disambiguator to run first");
+
+	for (auto const& param: _funDef.parameters)
+		m_values[param.name] = nullptr;
+
 	for (auto const& var: _funDef.returnVariables)
 		setValue(var.name, nullptr);
 	ASTWalker::operator()(_funDef);
