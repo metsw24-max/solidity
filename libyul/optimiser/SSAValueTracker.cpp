@@ -56,6 +56,32 @@ void SSAValueTracker::operator()(VariableDeclaration const& _varDecl)
 		setValue(_varDecl.variables.front().name, _varDecl.value.get());
 }
 
+bool SSAValueTracker::isSSAWithDependencies(Expression const* _expression) const
+{
+	if (_expression == nullptr)
+		return true;
+
+	if (auto const* functionCall = std::get_if<FunctionCall>(_expression))
+	{
+		for (auto const& argument: functionCall->arguments)
+			if (!isSSAWithDependencies(&argument))
+				return false;
+
+		return true;
+	}
+	else if (auto const* identifier = std::get_if<Identifier>(_expression))
+	{
+		auto const it = m_values.find(identifier->name);
+		if (it == m_values.end())
+			return false;
+		return isSSAWithDependencies(it->second);
+	}
+	else
+		solAssert(std::holds_alternative<Literal>(*_expression), "Impossible expression type");
+
+	return true;
+}
+
 std::set<YulName> SSAValueTracker::ssaVariables(Block const& _ast)
 {
 	SSAValueTracker t;
