@@ -7,6 +7,7 @@ Compiler Features:
 
 Bugfixes:
 * NatSpec: Disallow `@return` tag in event documentation.
+* Codegen: Fix ICE when assigning a calldata struct containing a member of external function type to a storage struct.
 
 
 ### 0.8.35 (2026-04-29)

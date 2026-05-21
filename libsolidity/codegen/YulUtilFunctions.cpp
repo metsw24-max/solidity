@@ -3798,16 +3798,15 @@ std::string YulUtilFunctions::copyStructToStorageFunction(StructType const& _fro
 				let memberSrcPtr := add(value, <memberOffset>)
 
 				<?fromCalldata>
-					let <memberValues> :=
-						<?dynamicallyEncodedMember>
-							<accessCalldataTail>(value, memberSrcPtr)
-						<!dynamicallyEncodedMember>
-							memberSrcPtr
-						</dynamicallyEncodedMember>
-
-					<?isValueType>
-						<memberValues> := <read>(<memberValues>)
-					</isValueType>
+					<?dynamicallyEncodedMember>
+						let <memberValues> := <accessCalldataTail>(value, memberSrcPtr)
+					<!dynamicallyEncodedMember>
+						<?isValueType>
+							let <memberValues> := <read>(memberSrcPtr)
+						<!isValueType>
+							let <memberValues> := memberSrcPtr
+						</isValueType>
+					</dynamicallyEncodedMember>
 				</fromCalldata>
 
 				<?fromMemory>
