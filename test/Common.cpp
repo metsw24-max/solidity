@@ -163,9 +163,9 @@ void CommonOptions::validate() const
 	}
 
 	solRequire(
-		!eofVersion().has_value() || evmVersion().supportsEOF(),
+		!eofVersion().has_value(),
 		ConfigException,
-		"EOF is not supported by EVM versions earlier than " + langutil::EVMVersion::firstWithEOF().name() + "."
+		"EOF is not supported by EVM versions earlier than " + langutil::EVMVersion::future().name() + "."
 	);
 }
 

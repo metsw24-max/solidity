@@ -188,7 +188,7 @@ std::vector<BuiltinFunctionForEVM const*> createDialectBuiltins(
 				builtinShouldBeAdded =
 					!isLowLevelControlFlowInstruction(_opcode) &&
 					!isLowLevelStackManipulationInstruction(_opcode) &&
-					_evmVersion.hasOpcode(_opcode, std::nullopt) &&
+					_evmVersion.hasOpcode(_opcode) &&
 					!prevRandaoException(builtin.name);
 			}
 		}

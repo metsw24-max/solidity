@@ -770,13 +770,13 @@ bool AsmAnalyzer::validateInstructions(evmasm::Instruction _instr, SourceLocatio
 	else
 	{
 		// Sanity check
-		solAssert(m_evmVersion.hasOpcode(_instr, std::nullopt));
+		solAssert(m_evmVersion.hasOpcode(_instr));
 		return false;
 	}
 
 	// Sanity check
 	// PC is not available in strict assembly but it is always valid opcode in legacy evm.
-	solAssert(_instr == evmasm::Instruction::PC || !m_evmVersion.hasOpcode(_instr, std::nullopt));
+	solAssert(_instr == evmasm::Instruction::PC || !m_evmVersion.hasOpcode(_instr));
 	return true;
 }
 
