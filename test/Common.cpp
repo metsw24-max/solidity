@@ -272,7 +272,7 @@ langutil::EVMVersion CommonOptions::evmVersion() const
 
 yul::EVMDialect const& CommonOptions::evmDialect() const
 {
-	return yul::EVMDialect::strictAssemblyForEVMObjects(evmVersion(), eofVersion());
+	return yul::EVMDialect::strictAssemblyForEVMObjects(evmVersion());
 }
 
 
